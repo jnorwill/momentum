@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="assets/favicon.ico" rel="shortcut icon" />
+    <link rel="stylesheet" href="./fonts.css" />
+    <link rel="stylesheet" href="./compressed/css/style.min.css" />
+    <title>momentum</title>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="player">
+        <div class="player-controls">
+          <button class="player-controls__prev button"></button>
+          <button class="player-controls__play button"></button>
+          <button class="player-controls__next button"></button>
+        </div>
+        <ul class="play-list"></ul>
+      </div>
+      <div class="weather">
+        <input type="text" class="weather__city" />
+        <i class="weather__icon"></i>
+        <!-- <div class="weather-error"></div> -->
+        <div class="weather__description">
+          <span class="weather__description_temperature"></span>
+          <span class="weather__description_weather"></span>
+        </div>
+        <div class="weather__wind"></div>
+        <div class="weather__humidity"></div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="slider">
+        <button class="slider__prev button"></button>
+        <button class="slider__next button"></button>
+      </div>
+      <time class="time"></time>
+      <date class="date"></date>
+      <div class="greeting-container">
+        <span class="greeting"></span>
+        <input type="text" class="name" />
+      </div>
+    </main>
+    <footer class="footer">
+      <button class="footer__change-quote button"></button>
+      <div>
+        <div class="footer__quote"></div>
+        <div class="footer__author"></div>
+      </div>
+      <div class="footer__github">
+        <div class="footer__link">2021</div>
+        <a class="footer__link" href="https://github.com/jnorwill">jnorwill</a>
+        <a class="footer__link footer__link_img" href="https://rs.school/js/"></a>
+      </div>
+    </footer>
+  </body>
+</html>
