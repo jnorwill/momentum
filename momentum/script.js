@@ -8,10 +8,10 @@ const dateContainer = document.querySelector('.date')
 // const buttonNext = document.querySelector('.player-controls__next')
 // const buttonNext = document.querySelector('.player-controls__next')
 
-const showTimesOfDay = () => {
+
+
+const getTimesOfDay = () => {
   let date = new Date()
-  const time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-  timeContainer.innerHTML = time
   if (date.getHours() >= 0 && date.getHours() < 6) {
     return 'night'
   } else if (date.getHours() >= 6 && date.getHours() < 12) {
@@ -25,50 +25,41 @@ const showTimesOfDay = () => {
 
 const getDateMonth = () => {
   let date = new Date()
-  if (date.getMonth() == 0) {
-    return 'January'
-  } else if (date.getMonth() == 1) {
-    return 'February'
-  } else if (date.getMonth() == 2) {
-    return 'March'
-  } else if (date.getMonth() == 3) {
-    return 'April'
-  } else if (date.getMonth() == 4) {
-    return 'May'
-  } else if (date.getMonth() == 5) {
-    return 'June'
-  } else if (date.getMonth() == 6) {
-    return 'July'
-  } else if (date.getMonth() == 7) {
-    return 'August'
-  } else if (date.getMonth() == 8) {
-    return 'September'
-  } else if (date.getMonth() == 9) {
-    return 'October'
-  } else if (date.getMonth() == 10) {
-    return 'November'
-  } else if (date.getMonth() == 11) {
-    return 'December'
-  }
+  const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+  return months[date.getMonth()]
 }
 
 const getDateDay = () => {
   let date = new Date()
-  if (date.getDay() == 0) {
-    return 'Sunday'
-  } else if (date.getDay() == 1) {
-    return 'Monday'
-  } else if (date.getDay() == 2) {
-    return 'Tuesday'
-  } else if (date.getDay() == 3) {
-    return 'Wednesday'
-  } else if (date.getDay() == 4) {
-    return 'Thursday'
-  } else if (date.getDay() == 5) {
-    return 'Friday'
-  } else if (date.getDay() == 6) {
-    return 'Saturday'
-  }
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ]
+  return days[date.getDay()]
+}
+
+const showTime = () => {
+  let date = new Date()
+  const time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+  timeContainer.innerHTML = time
 }
 
 const showDate = () => {
@@ -78,15 +69,16 @@ const showDate = () => {
 }
 
 const showGreeting = () => {
-  const greetingText = `Good ${showTimesOfDay()}`
+  const greetingText = `Good ${getTimesOfDay()}`
   greetingContainer.innerHTML = greetingText
 }
+
+showTime()
 showDate()
-showTimesOfDay()
 showGreeting()
-setInterval(showDate, 1000)
-setInterval(showTimesOfDay, 1000)
-setInterval(showGreeting, 1000)
+setInterval(showTime, 1000)
+// setInterval(showDate, 1000)
+setInterval(showGreeting, 1000 * 60 * 60 * 6)
 
 function setLocalStorage() {
   localStorage.setItem('name', name.value);
@@ -100,6 +92,6 @@ function getLocalStorage() {
 }
 window.addEventListener('load', getLocalStorage)
 
-// const getRandomNum = () => {
-//   let num = Math.floor(Math.random() * 20);
-// }
+const getRandomNum = () => {
+  let num = Math.floor(Math.random() * 20);
+}
