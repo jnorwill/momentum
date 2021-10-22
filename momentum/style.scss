@@ -148,7 +148,7 @@ body {
     font-size: 44px;
   }
 
-  &__description {
+  &__description-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -269,12 +269,12 @@ width: 100%;
     text-decoration: none;
     font-size: 20px;
     opacity: 0.8;
+    width: 100px;
     &:hover {
       cursor: pointer;
       opacity: 1;
     }
     &_img {
-      width: 75px;
       height: 25px;
       background: url(../../assets/svg/rss.svg) 50% 50% no-repeat;
     }

@@ -1,11 +1,35 @@
+const city = document.querySelector('.weather__city')
+
+const setLocalStorage = () => {
+  const nameText = document.querySelector('.name')
+  const city = document.querySelector('.weather__city')
+  localStorage.setItem('nameText', nameText.value)
+  localStorage.setItem('city', city.value)
+  console.log(city.value)
+}
+window.addEventListener('beforeunload', setLocalStorage)
+
+const getLocalStorage = () => {
+  const nameText = document.querySelector('.name')
+  if (localStorage.getItem('nameText')) {
+    nameText.value = localStorage.getItem('nameText')
+  }
+  const city = document.querySelector('.weather__city')
+  if (localStorage.getItem('city')) {
+    city.value = localStorage.getItem('city')
+    console.log(city.value)
+  }
+  getWeather()
+}
+window.addEventListener('load', getLocalStorage)
+
 // const buttonPlay = document.querySelector('.player-controls__play')
 // const buttonPrev = document.querySelector('.player-controls__prev')
 // const buttonNext = document.querySelector('.player-controls__next')
+
 const timeContainer = document.querySelector('.time')
 const greetingContainer = document.querySelector('.greeting')
-const name = document.querySelector('.name')
 const dateContainer = document.querySelector('.date')
-
 
 
 
@@ -82,17 +106,6 @@ setInterval(showTime, 1000)
 // setInterval(showDate, 1000)
 setInterval(showGreeting, 1000 * 60 * 60 * 6)
 
-function setLocalStorage() {
-  localStorage.setItem('name', name.value);
-}
-window.addEventListener('beforeunload', setLocalStorage)
-
-function getLocalStorage() {
-  if (localStorage.getItem('name')) {
-    name.value = localStorage.getItem('name');
-  }
-}
-window.addEventListener('load', getLocalStorage)
 
 
 const body = document.querySelector('body')
@@ -107,27 +120,54 @@ const setBg = () => {
   RandomNum = String(RandomNum).padStart(2, "0")
   const img = new Image();
   img.src = `https://raw.githubusercontent.com/jnorwill/stage1-tasks/assets/images/${getTimesOfDay()}/${RandomNum}.jpg`
-  img.onload = () => {      
+  img.onload = () => {
     body.style.backgroundImage = `url(${img.src})`
-  }; 
+  };
 }
 setBg()
 const getSlideNext = () => {
   if (RandomNum === '20') {
     RandomNum = '01'
     console.log(RandomNum)
-  } else {RandomNum++}
+  } else { RandomNum++ }
   setBg()
-  
+
 }
 const getSlidePrev = () => {
   if (RandomNum === '01') {
     RandomNum = '20'
-  } else {RandomNum--}
+  } else { RandomNum-- }
   setBg()
   console.log(RandomNum)
 }
 
 buttonSliderNext.addEventListener('click', getSlideNext)
 buttonSliderPrev.addEventListener('click', getSlidePrev)
+
+
+
+const weatherIcon = document.querySelector('.weather__icon')
+const weatherTemperature = document.querySelector('.weather__temperature')
+const weatherDescription = document.querySelector('.weather__description')
+const weatherWind = document.querySelector('.weather__wind')
+const weatherHumidity = document.querySelector('.weather__humidity')
+
+
+async function getWeather() {
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=08f2a575dda978b9c539199e54df03b0&units=metric`
+  const res = await fetch(url)
+  const data = await res.json()
+  weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+  weatherTemperature.innerHTML = `${Math.floor(data.main.temp)}°C `
+  weatherDescription.innerHTML = `${data.weather[0].description}`
+  weatherWind.innerHTML = `Wind speed: ${Math.floor(data.wind.speed)} m/s`
+  weatherHumidity.innerHTML = `Humidity: ${Math.floor(data.main.humidity)} %`
+  console.log(city.value)
+}
+
+city.addEventListener('change', getWeather)
+
+
+
 
