@@ -174,13 +174,15 @@ body {
   top: 50%;
   margin-top: -16px;
   cursor: pointer;
-
+width: 100%;
   &__prev {
+    position: absolute;
     left: 20px;
     background-image: url("../../assets/svg/slider-prev.svg");
   }
 
   &__next {
+    position: absolute;
     right: 20px;
     background-image: url("../../assets/svg/slider-next.svg");
   }
