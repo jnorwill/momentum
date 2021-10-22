@@ -5,8 +5,7 @@ const timeContainer = document.querySelector('.time')
 const greetingContainer = document.querySelector('.greeting')
 const name = document.querySelector('.name')
 const dateContainer = document.querySelector('.date')
-// const buttonNext = document.querySelector('.player-controls__next')
-// const buttonNext = document.querySelector('.player-controls__next')
+
 
 
 
@@ -26,19 +25,19 @@ const getTimesOfDay = () => {
 const getDateMonth = () => {
   let date = new Date()
   const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
   return months[date.getMonth()]
 }
 
@@ -58,7 +57,10 @@ const getDateDay = () => {
 
 const showTime = () => {
   let date = new Date()
-  const time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+  const hours = String(date.getHours()).padStart(2, "0")
+  const minutes = String(date.getMinutes()).padStart(2, "0")
+  const seconds = String(date.getSeconds()).padStart(2, "0")
+  const time = `${hours}:${minutes}:${seconds}`
   timeContainer.innerHTML = time
 }
 
@@ -92,6 +94,40 @@ function getLocalStorage() {
 }
 window.addEventListener('load', getLocalStorage)
 
-const getRandomNum = () => {
-  let num = Math.floor(Math.random() * 20);
+
+const body = document.querySelector('body')
+const buttonSliderPrev = document.querySelector('.slider__prev')
+const buttonSliderNext = document.querySelector('.slider__next')
+
+
+let RandomNum = Math.floor(Math.random() * 20)
+
+
+const setBg = () => {
+  RandomNum = String(RandomNum).padStart(2, "0")
+  const img = new Image();
+  img.src = `https://raw.githubusercontent.com/jnorwill/stage1-tasks/assets/images/${getTimesOfDay()}/${RandomNum}.jpg`
+  img.onload = () => {      
+    body.style.backgroundImage = `url(${img.src})`
+  }; 
 }
+setBg()
+const getSlideNext = () => {
+  if (RandomNum === '20') {
+    RandomNum = '01'
+    console.log(RandomNum)
+  } else {RandomNum++}
+  setBg()
+  
+}
+const getSlidePrev = () => {
+  if (RandomNum === '01') {
+    RandomNum = '20'
+  } else {RandomNum--}
+  setBg()
+  console.log(RandomNum)
+}
+
+buttonSliderNext.addEventListener('click', getSlideNext)
+buttonSliderPrev.addEventListener('click', getSlidePrev)
+
