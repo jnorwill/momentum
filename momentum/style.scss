@@ -40,7 +40,7 @@ body {
   font-size: 16px;
   color: #fff;
   text-align: center;
-  background:rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   background-blend-mode: multiply;
   transition: background-image 1s ease-in-out;
 }
@@ -60,7 +60,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 120px;
-  margin-bottom: 28px;
+  margin: 0 auto;
   &__play {
     width: 40px;
     height: 40px;
@@ -80,37 +80,85 @@ body {
   }
 }
 
-.play-list {
-  text-align: left;
+.progress {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 0 0;
+  .line-all {
+    background: rgba(255, 255, 255, 0.5);
+    height: 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    &:hover {
+      .line-current {
+        background: rgba(255, 255, 255, 1);
+      }
+    }
+  }
+  .line-current {
+    background: rgba(255, 255, 255, 0.75);
+    width: 50%;
+    height: 4px;
+    border-radius: 2px;
+  }
+  &__all {
+    width: 50%;
+  }
+  &__time {
+    width: 100px;
+  }
+  &__volume-all {
+    width: 60px;
+  }
+  &__volume-button {
+    border: none;
+    width: 23px;
+    height: 23px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: url(../../assets/svg/volume-on.svg) 50% 50% no-repeat;
+    background-size: contain;
+    margin-left: 10px;
+    opacity: 0.8;
+    &_off{
+      background: url(../../assets/svg/volume-off.svg) 50% 50% no-repeat;
+      background-size: contain;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
-//   .play-item {
-//     position: relative;
-//     padding: 5px;
-//     padding-left: 20px;
-//     list-style: none;
-//     opacity: .8;
-//     cursor: pointer;
-//     transition: .3s;
-//   }
+.play-list {
+  text-align: left;
+  &__item {
+    position: relative;
+    padding: 5px;
+    padding-left: 20px;
+    list-style: none;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      opacity: 1;
+    }
 
-//   .play-item:hover {
-//     opacity: 1;
-//   }
+    &::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-weight: 900;
+    }
+  }
 
-//   .play-item::before {
-//     content: "\2713";
-//     position: absolute;
-//     left: 0;
-//     top: 2px;
-//     font-weight: 900;
-//   }
-
-//   .item-active::before {
-//     color: #C5B358;
-//   }
-
-//
+  .item-active::before {
+    color: #c5b358;
+  }
+}
 
 .weather {
   display: flex;
@@ -121,7 +169,6 @@ body {
   width: 180px;
   min-height: 180px;
   text-align: left;
-
   &__city {
     width: 170px;
     height: 34px;
@@ -174,7 +221,7 @@ body {
   top: 50%;
   margin-top: -16px;
   cursor: pointer;
-width: 100%;
+  width: 100%;
   &__prev {
     position: absolute;
     left: 20px;

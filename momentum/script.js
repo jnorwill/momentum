@@ -23,9 +23,7 @@ const getLocalStorage = () => {
 }
 window.addEventListener('load', getLocalStorage)
 
-// const buttonPlay = document.querySelector('.player-controls__play')
-// const buttonPrev = document.querySelector('.player-controls__prev')
-// const buttonNext = document.querySelector('.player-controls__next')
+
 
 const timeContainer = document.querySelector('.time')
 const greetingContainer = document.querySelector('.greeting')
@@ -155,7 +153,7 @@ const weatherHumidity = document.querySelector('.weather__humidity')
 
 async function getWeather() {
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=08f2a575dda978b9c539199e54df03b0&units=metric`
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=687836a3b067d7a72f127c9e194380b6&units=metric`
   const res = await fetch(url)
   const data = await res.json()
   weatherIcon.classList.add(`owf-${data.weather[0].id}`);
@@ -167,7 +165,6 @@ async function getWeather() {
 }
 
 city.addEventListener('change', getWeather)
-
 
 
 

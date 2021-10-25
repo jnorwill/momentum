@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./fonts.css" />
     <link rel="stylesheet" href="./compressed/css/style.min.css" />
     <title>momentum</title>
+    <script src="./play.js" defer></script>
     <script src="./script.js" defer></script>
   </head>
   <body>
@@ -16,6 +17,16 @@
           <button class="player-controls__prev button"></button>
           <button class="player-controls__play button"></button>
           <button class="player-controls__next button"></button>
+        </div>
+        <div class="progress">
+          <div class="progress__all line-all">
+            <div class="progress__current line-current"></div>
+          </div>
+          <div class="progress__time">0:00 / 0:00</div>
+          <div class="progress__volume-all line-all">
+            <div class="progress__volume-current line-current"></div>
+          </div>
+          <button class="progress__volume-button"></button>
         </div>
         <ul class="play-list"></ul>
       </div>
