@@ -152,7 +152,6 @@ const weatherHumidity = document.querySelector('.weather__humidity')
 
 
 async function getWeather() {
-
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=687836a3b067d7a72f127c9e194380b6&units=metric`
   const res = await fetch(url)
   const data = await res.json()
@@ -166,5 +165,17 @@ async function getWeather() {
 
 city.addEventListener('change', getWeather)
 
+const quoteContainer = document.querySelector('.footer__quote')
+const authorContainer = document.querySelector('.footer__author')
+const quoteButton = document.querySelector('.footer__change-quote')
 
-
+async function changeQuote() {
+  const number = Math.floor(Math.random() * 20)
+  const url = `https://type.fit/api/quotes`
+  const res = await fetch(url)
+  const data = await res.json()
+  quoteContainer.innerHTML = data[number].text
+  authorContainer.innerHTML = data[number].author
+}
+changeQuote()
+quoteButton.addEventListener('click', changeQuote)
