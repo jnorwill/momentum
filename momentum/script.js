@@ -179,3 +179,21 @@ async function changeQuote() {
 }
 changeQuote()
 quoteButton.addEventListener('click', changeQuote)
+
+
+const settingButton = document.querySelector('.settings-main-button')
+const settings = document.querySelector('.settings')
+const settingsClose = document.querySelector('.settings__close')
+
+document.body.onclick = (event) => {
+  console.log(event.target, settingButton)
+  if (event.target === settingButton) {
+    settingButton.classList.add('settings-hidden')
+  settings.classList.remove('settings-hidden')
+  console.log(4)
+  } else if (event.target === settingsClose) {
+    settingButton.classList.remove('settings-hidden')
+  settings.classList.add('settings-hidden')
+  console.log(5)
+  }
+}
