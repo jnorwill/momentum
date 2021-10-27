@@ -55,23 +55,35 @@
       </div>
     </main>
     <footer class="footer">
-      <button class="footer__change-quote button"></button>
-      <div>
-        <div class="footer__quote"></div>
-        <div class="footer__author"></div>
+      <div class="quote-container">
+        <button class="footer__change-quote button"></button>
+        <div>
+          <div class="footer__quote"></div>
+          <div class="footer__author"></div>
+        </div>
       </div>
       <div class="settings-container">
         <button class="settings-main-button">Settings</button>
-          <ul class="settings settings-hidden">
-            <button class="settings__close"></button>
-            <li class="settings-language settings__item">
-              <p class="settings-language-title">Language:</p>
-              <div>
-                <button class="settings-language-ru settings__button">Ru</button>
-               <button class="settings-language-en settings__button">En</button>
-              </div>
-              </li>
-          </ul>
+        <ul class="settings settings-hidden">
+          <button class="settings__close"></button>
+          <li class="settings-language settings__item">
+            <p class="settings-language-title settings__tittle">Language:</p>
+            <div>
+              <button class="settings-language-ru settings-language-button settings__button">Ru</button>
+              <button class="settings-language-en settings-language-button settings__button">En</button>
+            </div>
+          </li>
+          <li class="settings-hide settings__item">
+            <p class="settings-hide-title settings__tittle">Hide:</p>
+            <div>
+              <button class="settings-hide-player settings-hide-button settings__button">Audio player</button>
+              <button class="settings-hide-weather settings-hide-button settings__button">Weather
+                forecast</button>
+              <button class="settings-hide-quote settings-hide-button settings__button">Quote of the
+                Day</button>
+            </div>
+          </li>
+        </ul>
       </div>
       <div class="footer__github">
         <div class="footer__link">2021</div>

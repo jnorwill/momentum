@@ -54,6 +54,26 @@ const languageTitle = document.querySelector('.settings-language-title')
 const buttonEn = document.querySelector('.settings-language-en')
 const buttonRu = document.querySelector('.settings-language-ru')
 
+const hideTitle = document.querySelector('.settings-hide-title')
+const buttonHidePlayer = document.querySelector('.settings-hide-player')
+const buttonHideWeather = document.querySelector('.settings-hide-weather')
+const buttonHideQuote = document.querySelector('.settings-hide-quote')
+const HidePlayer = document.querySelector('.player')
+const HideWeather = document.querySelector('.weather')
+const HideQuote = document.querySelector('.quote-container')
+
+
+buttonHidePlayer.addEventListener('click', () => {
+  HidePlayer.classList.toggle('hide-blocks')
+})
+buttonHideWeather.addEventListener('click', () => {
+  HideWeather.classList.toggle('hide-blocks')
+})
+buttonHideQuote.addEventListener('click', () => {
+  HideQuote.classList.toggle('hide-blocks')
+})
+
+
 const settingButton = document.querySelector('.settings-main-button')
 const settings = document.querySelector('.settings')
 const settingsClose = document.querySelector('.settings__close')
@@ -76,6 +96,10 @@ buttonEn.addEventListener('click', () => {
   changeQuote('text', 'author')
   settingButton.innerHTML = 'Settings'
   languageTitle.innerHTML = 'Language:'
+  hideTitle.innerHTML = 'Hide:'
+  buttonHidePlayer.innerHTML = 'Audio player'
+  buttonHideWeather.innerHTML = 'Weather forecast'
+  buttonHideQuote.innerHTML = 'Quote of the Day'
   languageWeather = 'en'
   languageWind = 'Wind speed'
   languageHumidity = 'Humidity'
@@ -114,6 +138,10 @@ buttonRu.addEventListener('click', () => {
   changeQuote('textRu', 'authorRu')
   settingButton.innerHTML = 'Настройки'
   languageTitle.innerHTML = 'Язык:'
+  hideTitle.innerHTML = 'Скрыть:'
+  buttonHidePlayer.innerHTML = 'Аудиоплеер'
+  buttonHideWeather.innerHTML = 'Прогноз погоды'
+  buttonHideQuote.innerHTML = 'Цитата дня'
   languageWeather = 'ru'
   languageWind = 'Скорость ветра'
   languageHumidity = 'Влажность'

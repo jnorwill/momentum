@@ -34,7 +34,7 @@
 }
 
 body {
-  min-width: 480px;
+  min-width: 600px;
   min-height: 100vh;
   font-family: "Arial", sans-serif;
   font-size: 16px;
@@ -53,6 +53,11 @@ body {
   height: 30vh;
   min-height: 220px;
   padding: 20px;
+}
+
+.player{
+ transition: 1s;
+ width: 400px;
 }
 
 .player-controls {
@@ -81,7 +86,6 @@ body {
 }
 
 .progress {
-  width: 400px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -166,11 +170,13 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   row-gap: 5px;
-  width: 180px;
+  transition: 1s;
+  min-width: 200px;
+  width: 200px;
   min-height: 180px;
   text-align: left;
   &__city {
-    width: 170px;
+    width: 100%;
     height: 34px;
     padding: 5px;
     font-size: 20px;
@@ -254,7 +260,7 @@ body {
   flex-wrap: wrap;
   justify-content: stretch;
   align-items: center;
-  min-height: 48px;
+line-height: 48px;
   width: 100vw;
   font-size: 40px;
 }
@@ -297,12 +303,9 @@ body {
   }
 
   &__quote {
-    min-height: 32px;
+    margin-bottom: 20px;
   }
 
-  &__author {
-    min-height: 20px;
-  }
 
   &__github {
     display: flex;
@@ -329,6 +332,10 @@ body {
   }
 }
 
+.quote-container{
+  transition: 1s;
+}
+
 .settings-container {
   position: absolute;
   bottom: 50%;
@@ -353,7 +360,11 @@ body {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  width: 190px;
+  width: 200px;
+  &__tittle{
+    white-space: nowrap;
+    padding-top: 7px;
+  }
   &__close {
     border: none;
     cursor: pointer;
@@ -371,39 +382,56 @@ body {
   }
   &__item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
   }
   &__button {
     border: none;
-    margin: 5px;
     padding: 3px;
+    margin: 5px;
     cursor: pointer;
     &:hover {
       opacity: 0.8;
     }
   }
 }
-.settings-hidden {
-  display: none;
+.settings-language-button{
+  width: 29px;
+  height: 20px;
+}
+.settings-hide-button{
+width: calc(100% - 5px);
 }
 @media (max-width: 768px) {
+  .player{
+    width: 300px;
+  }
   .time {
     min-height: 80px;
     font-size: 72px;
   }
-
+  
   .greeting-container {
-    min-height: 40px;
+    line-height: 40px;
     font-size: 32px;
   }
-
+  
   .greeting {
     padding: 5px;
   }
-
+  
   .name {
     font-size: 32px;
     padding: 5px;
   }
+  .footer__quote{
+    width: 300px;
+  }
+}
+
+.settings-hidden {
+  display: none;
+}
+.hide-blocks{
+  opacity: 0;
 }
