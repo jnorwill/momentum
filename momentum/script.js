@@ -71,6 +71,9 @@ settingsClose.addEventListener('click', () => {
 })
 
 buttonEn.addEventListener('click', () => {
+  const name = document.querySelector('.name')
+  name.placeholder = "[Enter name]"
+  changeQuote('text', 'author')
   settingButton.innerHTML = 'Settings'
   languageTitle.innerHTML = 'Language:'
   languageWeather = 'en'
@@ -106,6 +109,9 @@ buttonEn.addEventListener('click', () => {
 })
 
 buttonRu.addEventListener('click', () => {
+  const name = document.querySelector('.name')
+  name.placeholder = "[Введите имя]"
+  changeQuote('textRu', 'authorRu')
   settingButton.innerHTML = 'Настройки'
   languageTitle.innerHTML = 'Язык:'
   languageWeather = 'ru'
@@ -278,13 +284,21 @@ const quoteContainer = document.querySelector('.footer__quote')
 const authorContainer = document.querySelector('.footer__author')
 const quoteButton = document.querySelector('.footer__change-quote')
 
-async function changeQuote() {
-  const number = Math.floor(Math.random() * 20)
-  const url = `https://type.fit/api/quotes`
+async function changeQuote(text, author) {
+  const number = Math.floor(Math.random() * 25)
+  
+  console.log(number)
+  const url = './quote.json'
   const res = await fetch(url)
   const data = await res.json()
-  quoteContainer.innerHTML = data[number].text
-  authorContainer.innerHTML = data[number].author
+  quoteContainer.innerHTML = data[number][text]
+  authorContainer.innerHTML = data[number][author]
 }
-changeQuote()
-quoteButton.addEventListener('click', changeQuote)
+changeQuote('text', 'author')
+quoteButton.addEventListener('click',() =>{
+  if (languageWeather === 'en') {
+    changeQuote('text', 'author') 
+  } else if (languageWeather === 'ru') {
+    changeQuote('textRu', 'authorRu')
+  }
+})
