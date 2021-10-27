@@ -353,18 +353,19 @@ body {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  &__close{
+  width: 190px;
+  &__close {
     border: none;
     cursor: pointer;
-background: url(../../assets/svg/close.svg) 50% 50% no-repeat;
-background-size: contain;
+    background: url(../../assets/svg/close.svg) 50% 50% no-repeat;
+    background-size: contain;
     width: 13px;
     height: 13px;
     position: absolute;
     top: 5px;
     right: 5px;
     opacity: 0.8;
-    &:hover{
+    &:hover {
       opacity: 1;
     }
   }
@@ -383,8 +384,8 @@ background-size: contain;
     }
   }
 }
-.settings-hidden{
-display: none;
+.settings-hidden {
+  display: none;
 }
 @media (max-width: 768px) {
   .time {

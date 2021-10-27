@@ -17,13 +17,128 @@ const getLocalStorage = () => {
   const city = document.querySelector('.weather__city')
   if (localStorage.getItem('city')) {
     city.value = localStorage.getItem('city')
-    console.log(city.value)
   }
   getWeather()
 }
 window.addEventListener('load', getLocalStorage)
 
+let languageWeather = 'en'
+let languageWind = 'Wind speed'
+let languageHumidity = 'Humidity'
+let languageMonths = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+let languageDays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+]
 
+
+const languageTitle = document.querySelector('.settings-language-title')
+const buttonEn = document.querySelector('.settings-language-en')
+const buttonRu = document.querySelector('.settings-language-ru')
+
+const settingButton = document.querySelector('.settings-main-button')
+const settings = document.querySelector('.settings')
+const settingsClose = document.querySelector('.settings__close')
+
+
+
+settingButton.addEventListener('click', () => {
+  settingButton.classList.add('settings-hidden')
+  settings.classList.remove('settings-hidden')
+})
+
+settingsClose.addEventListener('click', () => {
+  settingButton.classList.remove('settings-hidden')
+  settings.classList.add('settings-hidden')
+})
+
+buttonEn.addEventListener('click', () => {
+  settingButton.innerHTML = 'Settings'
+  languageTitle.innerHTML = 'Language:'
+  languageWeather = 'en'
+  languageWind = 'Wind speed'
+  languageHumidity = 'Humidity'
+  languageMonths = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+  languageDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ]
+  getWeather()
+  showGreeting()
+  showDate()
+  showGreeting()
+})
+
+buttonRu.addEventListener('click', () => {
+  settingButton.innerHTML = 'Настройки'
+  languageTitle.innerHTML = 'Язык:'
+  languageWeather = 'ru'
+  languageWind = 'Скорость ветра'
+  languageHumidity = 'Влажность'
+  languageMonths = [
+    'Января',
+    'Февраля',
+    'Мара',
+    'Апреля',
+    'Мая',
+    'Июня',
+    'Июля',
+    'Августа',
+    'Сентября',
+    'Октября',
+    'Ноября',
+    'Декабря',
+  ]
+  languageDays = [
+    'Вскресенье',
+    'Понедельник',
+    'Вторник',
+    'Среда',
+    'Четверг',
+    'Пятница',
+    'Суббота',
+  ]
+  getWeather()
+  showGreeting()
+  showDateRu()
+  showGreetingRu()
+})
 
 const timeContainer = document.querySelector('.time')
 const greetingContainer = document.querySelector('.greeting')
@@ -46,35 +161,12 @@ const getTimesOfDay = () => {
 
 const getDateMonth = () => {
   let date = new Date()
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-  return months[date.getMonth()]
+  return languageMonths[date.getMonth()]
 }
 
 const getDateDay = () => {
   let date = new Date()
-  const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ]
-  return days[date.getDay()]
+  return languageDays[date.getDay()]
 }
 
 const showTime = () => {
@@ -92,8 +184,28 @@ const showDate = () => {
   dateContainer.innerHTML = dateText
 }
 
+const showDateRu = () => {
+  let date = new Date()
+  const dateText = `${getDateDay()}, ${date.getDate()} ${getDateMonth()}`
+  dateContainer.innerHTML = dateText
+}
+
 const showGreeting = () => {
   const greetingText = `Good ${getTimesOfDay()}`
+  greetingContainer.innerHTML = greetingText
+}
+
+const showGreetingRu = () => {
+  let greetingText
+  if (getTimesOfDay() === 'afternoon') {
+    greetingText = 'Добрый день'
+  } else if (getTimesOfDay() === 'evening') {
+    greetingText = 'Добрый вечер'
+  } else if (getTimesOfDay() === 'night') {
+    greetingText = 'Доброй ночи'
+  } else if (getTimesOfDay() === 'morning') {
+    greetingText = 'Доброе утро'
+  }
   greetingContainer.innerHTML = greetingText
 }
 
@@ -126,7 +238,6 @@ setBg()
 const getSlideNext = () => {
   if (RandomNum === '20') {
     RandomNum = '01'
-    console.log(RandomNum)
   } else { RandomNum++ }
   setBg()
 
@@ -136,7 +247,6 @@ const getSlidePrev = () => {
     RandomNum = '20'
   } else { RandomNum-- }
   setBg()
-  console.log(RandomNum)
 }
 
 buttonSliderNext.addEventListener('click', getSlideNext)
@@ -152,15 +262,14 @@ const weatherHumidity = document.querySelector('.weather__humidity')
 
 
 async function getWeather() {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=687836a3b067d7a72f127c9e194380b6&units=metric`
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${languageWeather}&appid=687836a3b067d7a72f127c9e194380b6&units=metric`
   const res = await fetch(url)
   const data = await res.json()
   weatherIcon.classList.add(`owf-${data.weather[0].id}`);
   weatherTemperature.innerHTML = `${Math.floor(data.main.temp)}°C `
   weatherDescription.innerHTML = `${data.weather[0].description}`
-  weatherWind.innerHTML = `Wind speed: ${Math.floor(data.wind.speed)} m/s`
-  weatherHumidity.innerHTML = `Humidity: ${Math.floor(data.main.humidity)} %`
-  console.log(city.value)
+  weatherWind.innerHTML = `${languageWind}: ${Math.floor(data.wind.speed)} m/s`
+  weatherHumidity.innerHTML = `${languageHumidity}: ${Math.floor(data.main.humidity)} %`
 }
 
 city.addEventListener('change', getWeather)
@@ -179,21 +288,3 @@ async function changeQuote() {
 }
 changeQuote()
 quoteButton.addEventListener('click', changeQuote)
-
-
-const settingButton = document.querySelector('.settings-main-button')
-const settings = document.querySelector('.settings')
-const settingsClose = document.querySelector('.settings__close')
-
-document.body.onclick = (event) => {
-  console.log(event.target, settingButton)
-  if (event.target === settingButton) {
-    settingButton.classList.add('settings-hidden')
-  settings.classList.remove('settings-hidden')
-  console.log(4)
-  } else if (event.target === settingsClose) {
-    settingButton.classList.remove('settings-hidden')
-  settings.classList.add('settings-hidden')
-  console.log(5)
-  }
-}
