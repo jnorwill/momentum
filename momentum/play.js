@@ -40,6 +40,7 @@ const buttonPlay = document.querySelector('.player-controls__play')
 const buttonPrev = document.querySelector('.player-controls__prev')
 const buttonNext = document.querySelector('.player-controls__next')
 const playerTime = document.querySelector('.progress__time')
+playerTime.innerHTML = `0:00 / 0:00`
 const audio = new Audio();
 let i = 0
 
@@ -54,10 +55,12 @@ const showCurrentTime = () => {
   playerTime.innerHTML = `${currentMinutes}:${currentSeconds} / ${allMinutes}:${allSeconds}`
   currentProgress.style.width = `${+(currentTime * 100 / allTime).toFixed(0)}%`
   if (currentTime === allTime) {
+    clearInterval(timerId)
     i++
     showActiveSong()
   }
 }
+let timerId
 const showActiveSong = () => {
   audio.src = playList[i].src
   audio.play()
@@ -68,7 +71,8 @@ const showActiveSong = () => {
   }
   const activeSong = document.querySelector(`.play-list__item_${i}`)
   activeSong.classList.add('item-active')
-  setInterval(showCurrentTime, 1000)
+  playerTime.innerHTML = `0:00 / 0:00`
+  timerId = setInterval(showCurrentTime, 1000)
 }
 
 
@@ -77,13 +81,14 @@ const playAndPause = () => {
   if (buttonPlay.classList.contains('player-controls__pause')) {
     audio.pause()
     buttonPlay.classList.remove('player-controls__pause')
+    clearInterval(timerId)
   } else {
     showActiveSong()
   }
-
 }
 buttonPlay.addEventListener('click', playAndPause)
 buttonPrev.addEventListener('click', () => {
+  clearInterval(timerId)
   if (i === 0) {
     i = 3
   } else {
@@ -92,6 +97,7 @@ buttonPrev.addEventListener('click', () => {
   showActiveSong()
 })
 buttonNext.addEventListener('click', () => {
+  clearInterval(timerId)
   if (i === 3) {
     i = 0
   } else {
@@ -106,6 +112,12 @@ const volumeButton = document.querySelector('.progress__volume-button')
 
 
 let width
+const defoultVolume = () => {
+  width = 50
+  audio.volume = width / 100
+}
+defoultVolume()
+
 const showVolume = (event) => {
   const widthAll = volumeAll.offsetWidth
   width = +((+event.pageX.toFixed(0) - volumeCurrent.getBoundingClientRect().left.toFixed(0)) * 100 / widthAll).toFixed(0)
