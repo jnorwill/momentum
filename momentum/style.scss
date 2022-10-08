@@ -34,6 +34,10 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
   min-width: 600px;
   min-height: 100vh;
   font-family: "Arial", sans-serif;
@@ -49,6 +53,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 30vh;
   min-height: 220px;
@@ -103,9 +110,11 @@ body {
   }
   .line-current {
     background: rgba(255, 255, 255, 0.75);
-    width: 50%;
     height: 4px;
     border-radius: 2px;
+  }
+  &__current{
+    width: 0%;
   }
   &__all {
     width: 50%;
@@ -115,6 +124,9 @@ body {
   }
   &__volume-all {
     width: 60px;
+  }
+  &__volume-current{
+    width: 50%;
   }
   &__volume-button {
     border: none;
@@ -144,11 +156,11 @@ body {
     padding-left: 20px;
     list-style: none;
     opacity: 0.8;
-    cursor: pointer;
-    transition: 0.3s;
-    &:hover {
-      opacity: 1;
-    }
+    // cursor: pointer;
+    // transition: 0.3s;
+    // &:hover {
+    //   opacity: 1;
+    // }
 
     &::before {
       content: "\2713";
@@ -193,9 +205,6 @@ body {
     }
   }
 
-  // .weather-error {
-  //   margin-top: -10px;
-  // }
 
   &__icon {
     font-size: 44px;
@@ -290,15 +299,14 @@ line-height: 48px;
 .footer {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 30vh;
   min-height: 160px;
-  padding: 20px;
   position: relative;
   &__change-quote {
-    margin-bottom: 30px;
+    margin: 20px;
     background-image: url("../../assets/svg/reload.svg");
   }
 
@@ -310,7 +318,7 @@ line-height: 48px;
   &__github {
     display: flex;
     justify-content: space-around;
-    margin-top: 40px;
+    margin: 20px;
     width: 100%;
   }
 
@@ -364,6 +372,7 @@ line-height: 48px;
   &__tittle{
     white-space: nowrap;
     padding-top: 7px;
+    opacity: 0.8;
   }
   &__close {
     border: none;
@@ -387,6 +396,8 @@ line-height: 48px;
   }
   &__button {
     border: none;
+    border-radius: 3px;
+    background: rgb(255 255 255 / 80%);
     padding: 3px;
     margin: 5px;
     cursor: pointer;
@@ -432,6 +443,11 @@ width: calc(100% - 5px);
 .settings-hidden {
   display: none;
 }
+.button-selected{
+  opacity: 0.8;
+}
 .hide-blocks{
   opacity: 0;
+  user-select: none;
+  pointer-events: none
 }

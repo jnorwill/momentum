@@ -5,7 +5,6 @@ const setLocalStorage = () => {
   const city = document.querySelector('.weather__city')
   localStorage.setItem('nameText', nameText.value)
   localStorage.setItem('city', city.value)
-  console.log(city.value)
 }
 window.addEventListener('beforeunload', setLocalStorage)
 
@@ -65,12 +64,15 @@ const HideQuote = document.querySelector('.quote-container')
 
 buttonHidePlayer.addEventListener('click', () => {
   HidePlayer.classList.toggle('hide-blocks')
+  buttonHidePlayer.classList.toggle('button-selected')
 })
 buttonHideWeather.addEventListener('click', () => {
   HideWeather.classList.toggle('hide-blocks')
+  buttonHideWeather.classList.toggle('button-selected')
 })
 buttonHideQuote.addEventListener('click', () => {
   HideQuote.classList.toggle('hide-blocks')
+  buttonHideQuote.classList.toggle('button-selected')
 })
 
 
@@ -314,8 +316,6 @@ const quoteButton = document.querySelector('.footer__change-quote')
 
 async function changeQuote(text, author) {
   const number = Math.floor(Math.random() * 25)
-  
-  console.log(number)
   const url = './quote.json'
   const res = await fetch(url)
   const data = await res.json()
