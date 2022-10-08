@@ -35,18 +35,19 @@ const createList = () => {
 }
 createList()
 
-
 const buttonPlay = document.querySelector('.player-controls__play')
 const buttonPrev = document.querySelector('.player-controls__prev')
 const buttonNext = document.querySelector('.player-controls__next')
 const playerTime = document.querySelector('.progress__time')
 playerTime.innerHTML = `0:00 / 0:00`
-const audio = new Audio();
+let audio = new Audio();
 let i = 0
 
-const currentProgress = document.querySelector('.progress__current')
 const showCurrentTime = () => {
+  if(isNaN(audio.duration)) return 
+  
   const allTime = +audio.duration.toFixed(0)
+  console.log("# audio.duration", audio.duration)
   const currentTime = +audio.currentTime.toFixed(0)
   const currentMinutes = +(currentTime / 60).toFixed(0)
   const currentSeconds = String(currentTime % 60).padStart(2, "0")
@@ -55,14 +56,25 @@ const showCurrentTime = () => {
   playerTime.innerHTML = `${currentMinutes}:${currentSeconds} / ${allMinutes}:${allSeconds}`
   currentProgress.style.width = `${+(currentTime * 100 / allTime).toFixed(0)}%`
   if (currentTime === allTime) {
-    clearInterval(timerId)
-    i++
+    switchTrack(i + 1)
     showActiveSong()
   }
 }
-let timerId
-const showActiveSong = () => {
+
+const switchTrack = (pos) => {
+  i = pos
+
+  audio.pause()
+
+  audio = new Audio();
   audio.src = playList[i].src
+  audio.ontimeupdate = showCurrentTime
+}
+switchTrack(0)
+
+const currentProgress = document.querySelector('.progress__current')
+
+const showActiveSong = () => {
   audio.play()
   buttonPlay.classList.add('player-controls__pause')
   const prevActiveSong = document.querySelector('.item-active')
@@ -71,37 +83,31 @@ const showActiveSong = () => {
   }
   const activeSong = document.querySelector(`.play-list__item_${i}`)
   activeSong.classList.add('item-active')
-  playerTime.innerHTML = `0:00 / 0:00`
-  timerId = setInterval(showCurrentTime, 1000)
 }
 
 
 const playAndPause = () => {
-  audio.src = playList[i].src
   if (buttonPlay.classList.contains('player-controls__pause')) {
     audio.pause()
     buttonPlay.classList.remove('player-controls__pause')
-    clearInterval(timerId)
   } else {
     showActiveSong()
   }
 }
 buttonPlay.addEventListener('click', playAndPause)
 buttonPrev.addEventListener('click', () => {
-  clearInterval(timerId)
   if (i === 0) {
-    i = 3
+    switchTrack(3)
   } else {
-    i--
+    switchTrack(i - 1)
   }
   showActiveSong()
 })
 buttonNext.addEventListener('click', () => {
-  clearInterval(timerId)
   if (i === 3) {
-    i = 0
+    switchTrack(0)
   } else {
-    i++
+    switchTrack(i + 1)
   }
   showActiveSong()
 })
